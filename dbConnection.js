@@ -1,5 +1,5 @@
 const mysql = require("mysql2");
-require('dotenv').config();
+require("dotenv").config();
 
 const dbConnection = mysql.createConnection({
   host: "localhost",
@@ -7,7 +7,7 @@ const dbConnection = mysql.createConnection({
   password: process.env.DB_PASSWORD,
   database: "navomin_super",
   authPlugins: {
-    mysql_clear_password: () => () => Buffer.from("your_password"),
+    mysql_clear_password: () => () => Buffer.from(process.env.DB_PASSWORD),
   },
 });
 

@@ -1,5 +1,5 @@
 const express = require("express");
-const dbConnection = require("./dbConnection");
+const dbConnection = require("../dbConnection");
 
 const router = express.Router();
 
@@ -78,4 +78,5 @@ router.delete("/:User_Id", (req, res) => {
     }
   );
 });
+
 module.exports = router;

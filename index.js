@@ -7,7 +7,8 @@ app.use(express.json()); // Middleware to parse JSON requests
 
 app.use(cors()); // Enable CORS
 
-app.use("/user", require("./user"));
+app.use("/user", require("./routes/user"));
+app.use("/cart", require("./routes/cart"));
 
 // Error handling
 app.use((err, req, res, next) => {

@@ -30,6 +30,25 @@ router.get("/:User_Id", (req, res) => {
   );
 });
 
+// validate user with email and password and retrieve the user
+router.post("/login", (req, res) => {
+  const { Email, Password } = req.body;
+  dbConnection.query(
+    "SELECT * FROM user WHERE Email = ? AND Password = ?",
+    [Email, Password],
+    (err, result) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send("Something went wrong!");
+      } else if (result.length === 0) {
+        res.status(401).send("Invalid email or password!");
+      } else {
+        res.json(result[0]);
+      }
+    }
+  );
+});
+
 router.post("/", (req, res) => {
   const { First_Name, Last_Name, Email, Password, Phone_Number } = req.body;
   dbConnection.query(

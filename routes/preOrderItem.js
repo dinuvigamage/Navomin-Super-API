@@ -14,17 +14,17 @@ router.get("/", (req, res) => {
   });
 });
 
-router.get("/:Pre_Order_Item_ID", (req, res) => {
-  const { Pre_Order_Item_ID } = req.params;
+router.get("/:Pre_Order_ID", (req, res) => {
+  const { Pre_Order_ID } = req.params;
   dbConnection.query(
-    "SELECT * FROM pre_order_item WHERE Pre_Order_Item_ID = ?",
-    [Pre_Order_Item_ID],
+    "SELECT * FROM pre_order_item WHERE Pre_Order_ID = ?",
+    [Pre_Order_ID],
     (err, result) => {
       if (err) {
         console.error(err);
         res.status(500).send("Something went wrong!");
       } else {
-        res.json(result[0]);
+        res.json(result);
       }
     }
   );

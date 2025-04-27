@@ -79,6 +79,23 @@ router.put("/:Order_ID", (req, res) => {
   );
 });
 
+router.put("/status/:Order_ID", (req, res) => {
+  const { Order_ID } = req.params;
+  const { Status } = req.body;
+  dbConnection.query(
+    "UPDATE order_table SET Status = ? WHERE Order_ID = ?",
+    [Status, Order_ID],
+    (err, result) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send("Something went wrong!");
+      } else {
+        res.status(200).send("Order status updated successfully!");
+      }
+    }
+  );
+});
+
 router.delete("/:Order_ID", (req, res) => {
   const { Order_ID } = req.params;
   dbConnection.query(

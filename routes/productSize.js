@@ -47,10 +47,10 @@ router.get("/size/:Size_ID", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  const { Product_ID, Price, Size } = req.body;
+  const { Product_ID, Price, Size, Stock } = req.body;
   dbConnection.query(
-    "INSERT INTO product_size (Product_ID, Price, Size) VALUES (?, ?, ?)",
-    [Product_ID, Price, Size],
+    "INSERT INTO product_size (Product_ID, Price, Size, Stock) VALUES (?, ?, ?, ?)",
+    [Product_ID, Price, Size, Stock],
     (err, result) => {
       if (err) {
         console.error(err);
@@ -62,12 +62,12 @@ router.post("/", (req, res) => {
   );
 });
 
-router.put("/:Size_ID", (req, res) => {
+router.put("/stock/:Size_ID", (req, res) => {
   const { Size_ID } = req.params;
-  const { Product_ID, Price, Size } = req.body;
+  const { Stock } = req.body;
   dbConnection.query(
-    "UPDATE product_size SET Product_ID = ?, Price = ?, Size = ? WHERE Size_ID = ?",
-    [Product_ID, Price, Size, Size_ID],
+    "UPDATE product_size SET Stock = ? WHERE Size_ID = ?",
+    [Stock, Size_ID],
     (err, result) => {
       if (err) {
         console.error(err);

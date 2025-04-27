@@ -63,11 +63,11 @@ router.put("/:Image_ID", (req, res) => {
   );
 });
 
-router.delete("/:Image_ID", (req, res) => {
-  const { Image_ID } = req.params;
+router.delete("/:Product_ID", (req, res) => {
+  const { Product_ID } = req.params;
   dbConnection.query(
-    "DELETE FROM product_image WHERE Image_ID = ?",
-    [Image_ID],
+    "DELETE FROM product_image WHERE Product_ID = ?",
+    [Product_ID],
     (err, result) => {
       if (err) {
         console.error(err);

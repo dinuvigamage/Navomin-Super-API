@@ -14,17 +14,17 @@ router.get("/", (req, res) => {
   });
 });
 
-router.get("/:OrderItem_ID", (req, res) => {
-  const { OrderItem_ID } = req.params;
+router.get("/:Order_ID", (req, res) => {
+  const { Order_ID } = req.params;
   dbConnection.query(
-    "SELECT * FROM order_item WHERE OrderItem_ID = ?",
-    [OrderItem_ID],
+    "SELECT * FROM order_item WHERE Order_ID = ?",
+    [Order_ID],
     (err, result) => {
       if (err) {
         console.error(err);
         res.status(500).send("Something went wrong!");
       } else {
-        res.json(result[0]);
+        res.json(result);
       }
     }
   );

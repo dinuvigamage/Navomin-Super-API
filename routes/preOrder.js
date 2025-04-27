@@ -81,6 +81,25 @@ router.put("/:Pre_Order_ID", (req, res) => {
   );
 });
 
+router.put("/status/:Pre_Order_ID", (req, res) => {
+  const { Pre_Order_ID } = req.params;
+  const { Status } = req.body;
+  console.log(Status);
+  console.log(Pre_Order_ID);
+  dbConnection.query(
+    "UPDATE pre_order SET Status = ? WHERE Pre_Order_ID = ?",
+    [Status, Pre_Order_ID],
+    (err, result) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send("Something went wrong!");
+      } else {
+        res.status(200).send("Pre-order status updated successfully!");
+      }
+    }
+  );
+});
+
 router.delete("/:Pre_Order_ID", (req, res) => {
   const { Pre_Order_ID } = req.params;
   dbConnection.query(

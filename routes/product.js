@@ -31,10 +31,11 @@ router.get("/:Product_ID", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  const { ProductCategory_ID, Product_Name, Product_Description } = req.body;
+  const { Product_ID, ProductCategory_ID, Product_Name, Product_Description } =
+    req.body;
   dbConnection.query(
-    "INSERT INTO product (ProductCategory_ID, Product_Name, Product_Description) VALUES (?, ?, ?)",
-    [ProductCategory_ID, Product_Name, Product_Description],
+    "INSERT INTO product (Product_ID, ProductCategory_ID, Product_Name, Product_Description) VALUES (?, ?, ?, ?)",
+    [Product_ID, ProductCategory_ID, Product_Name, Product_Description],
     (err, result) => {
       if (err) {
         console.error(err);
@@ -74,6 +75,25 @@ router.delete("/:Product_ID", (req, res) => {
         res.status(500).send("Something went wrong!");
       } else {
         res.status(200).send("Product deleted successfully!");
+      }
+    }
+  );
+});
+
+router.get("/stock/:ProductCategory_ID", (req, res) => {
+  const { ProductCategory_ID } = req.params;
+  console.log(`ProductCategory_ID: ${ProductCategory_ID}`);
+  dbConnection.query(
+    `SELECT *
+     FROM product
+     WHERE ProductCategory_ID = ?`,
+    [ProductCategory_ID],
+    (err, result) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send("Something went wrong!");
+      } else {
+        res.json(result);
       }
     }
   );

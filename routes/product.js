@@ -82,7 +82,6 @@ router.delete("/:Product_ID", (req, res) => {
 
 router.get("/stock/:ProductCategory_ID", (req, res) => {
   const { ProductCategory_ID } = req.params;
-  console.log(`ProductCategory_ID: ${ProductCategory_ID}`);
   dbConnection.query(
     `SELECT *
      FROM product
